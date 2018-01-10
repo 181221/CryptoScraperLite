@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Crypto" />
+        <module name="CryptoLite" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Crypto" target="1.7" />
+      <module name="CryptoLite" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

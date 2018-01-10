@@ -1,4 +1,4 @@
-package api;
+package no.api;
 
 import javax.json.*;
 import javax.json.stream.JsonParser;
@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashSet;
 
 public class CoinService {
 

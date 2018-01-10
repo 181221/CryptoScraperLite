@@ -1,17 +1,22 @@
 package no.pederyo.Scraper;
 
-import api.Coin;
-import api.CoinService;
+import no.api.Coin;
+import no.api.CoinService;
+import no.pederyo.PushBullet;
+import no.pederyo.VerdiSjekker;
 
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
+import java.text.DecimalFormat;
 
 public class ScrapeRunner implements Runnable {
-    private String name;
-    private static double oldValue30SekSjekk = 0.0;
-    private static double forjeVerdi30minSjekk = 0.0;
+    private Coin coin;
+    private static String name;
+    private static double oldValue = 0.0;
     private static int iterasjon = 0;
 
-    public ScrapeRunner(String name) {
+    public ScrapeRunner(String name) throws MalformedURLException {
+        coin = CoinService.getPris(name);
         this.name = name;
     }
 
@@ -20,12 +25,11 @@ public class ScrapeRunner implements Runnable {
         while(true){
             try {
                 iterasjon++;
-                Coin coin = CoinService.getPris(name);
-                double verdi = coin.getPris();
+                double verdi = CoinService.getPris(name).getPris();
                 if(iterasjon % 3 == 0) {
-                    oldValue30SekSjekk = verdi;
+                    oldValue = verdi;
                 }
-                System.out.println("Navn: " + coin.getName() + " Pris: " + coin.getPris());
+                halvTimeSjekkVerdiEndring(coin);
                 Thread.sleep(3000);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -34,6 +38,18 @@ public class ScrapeRunner implements Runnable {
             }
         }
     }
+    public static boolean halvTimeSjekkVerdiEndring(Coin coin) {
+        boolean leggTil = false;
+        if (iterasjon % 180 == 0) {
+            leggTil = VerdiSjekker.sjekkVerdiOgPushNotifikasjon(coin); //sjekker gammel mot current verdi.
+            if (leggTil) {
+               coin.setForjePris(coin.getPris());//legger til ny verdi om det har vært en økning på 8% siden forjegang.
+            }
+        }
+        return leggTil;
+    }
+
+
 }
 /*
 

@@ -1,7 +1,5 @@
 package no.pederyo;
 
-import api.Coin;
-import api.CoinService;
 import no.pederyo.Scraper.ScrapeRunner;
 
 import java.io.IOException;
