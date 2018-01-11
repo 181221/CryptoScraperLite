@@ -9,11 +9,12 @@ import static no.pederyo.util.CoinUtil.formaterTall;
 
 public class ScrapeRunner implements Runnable {
     private Coin coin;
-    private static String name;
+    private String name;
     private static int iterasjon = 0;
 
     public ScrapeRunner(String name) throws MalformedURLException {
         coin = CoinService.getPris(name);
+        coin.setForjePris(coin.getPris());
         this.name = name;
     }
 

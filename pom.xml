@@ -27,7 +27,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>no.pederyo.klient.Klient</mainClass>
+                            <mainClass>no.pederyo.Klient</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
