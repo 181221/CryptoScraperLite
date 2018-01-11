@@ -1,4 +1,4 @@
-package no.api;
+package no.api.coinmarket;
 
 public class Coin {
     private String name;

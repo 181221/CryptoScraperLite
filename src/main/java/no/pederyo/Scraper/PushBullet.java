@@ -1,4 +1,4 @@
-package no.pederyo;
+package no.pederyo.Scraper;
 
 import no.api.pushbullet.PushbulletClient;
 import no.api.pushbullet.items.device.Device;

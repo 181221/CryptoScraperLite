@@ -1,4 +1,4 @@
-package no.pederyo;
+package no.pederyo.util;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

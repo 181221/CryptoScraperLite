@@ -1,4 +1,4 @@
-package no.api;
+package no.api.coinmarket;
 
 import javax.json.*;
 import javax.json.stream.JsonParser;
@@ -36,7 +36,7 @@ public class CoinService {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Coinen finnes ikke eller sjekk navn");
-
+            System.exit(2);
         }
         return c;
     }
