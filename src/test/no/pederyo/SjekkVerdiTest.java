@@ -18,7 +18,7 @@ public class SjekkVerdiTest {
         verdiSjekker = new VerdiSjekker();
         c = new Coin();
     }
-    @Ignore
+
     @Test
     public void sjekkVerdiOgPushNotifikasjonTest(){
         c.setName("bitcoin");
@@ -39,6 +39,7 @@ public class SjekkVerdiTest {
 
     }
     // Maa ordnes paa.
+    @Ignore
     @Test
     public void haltimeendirng(){
         ScrapeRunner sr = null;

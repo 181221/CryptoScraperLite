@@ -14,7 +14,7 @@ public class ScrapeRunner implements Runnable {
 
     public ScrapeRunner(String name) throws MalformedURLException {
         coinService = new CoinService();
-        coin = coinService.getPris(name); //Oppretter coinen
+        coin = coinService.oppRettCoin(name); //Oppretter coinen
         coin.setForjePris(coin.getPris());
         this.name = name;
         verdiSjekker = new VerdiSjekker();
@@ -25,7 +25,7 @@ public class ScrapeRunner implements Runnable {
         while(true){
             try {
 
-                coin.setPris(coinService.getPris(name).getPris());
+                coin.setPris(coinService.getPris(name));
 
                 halvTimeSjekkVerdiEndring();
 
