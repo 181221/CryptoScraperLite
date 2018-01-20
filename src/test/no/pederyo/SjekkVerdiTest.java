@@ -1,5 +1,6 @@
 package no.pederyo;
 import no.api.coinmarket.Coin;
+import no.api.coinmarket.CoinService;
 import no.pederyo.Scraper.ScrapeRunner;
 import no.pederyo.Scraper.VerdiSjekker;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import static junit.framework.TestCase.assertTrue;
 public class SjekkVerdiTest {
     private VerdiSjekker verdiSjekker;
     private Coin c;
+    private Coin ck;
     @Before
     public void setup() {
         verdiSjekker = new VerdiSjekker();
@@ -36,6 +38,17 @@ public class SjekkVerdiTest {
 
         c.setPris(23);
         assertTrue(verdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
+
+        CoinService cs = new CoinService();
+        try {
+            ck = cs.opprettCoin("iota");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        ck.setPris(2.0);
+        ck.setForjePris(3.0);
+        assertTrue(verdiSjekker.sjekkVerdiOgPushNotifikasjon(ck));
+
 
     }
     // Maa ordnes paa.

@@ -12,7 +12,7 @@ public class CoinService {
     public CoinService() {
 
     }
-    public Coin oppRettCoin(String name) throws MalformedURLException {
+    public Coin opprettCoin(String name) throws MalformedURLException {
         String baseUrl = "https://api.coinmarketcap.com/v1/ticker/";
         String coinname = name;
         URL url = new URL(baseUrl + coinname);

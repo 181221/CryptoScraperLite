@@ -7,16 +7,14 @@ import java.net.MalformedURLException;
 
 public class ScrapeRunner implements Runnable {
     private Coin coin;
-    private String name;
     private static int iterasjon = 0;
     private CoinService coinService;
     private VerdiSjekker verdiSjekker;
 
     public ScrapeRunner(String name) throws MalformedURLException {
         coinService = new CoinService();
-        coin = coinService.oppRettCoin(name); //Oppretter coinen
+        coin = coinService.opprettCoin(name); //Oppretter coinen
         coin.setForjePris(coin.getPris());
-        this.name = name;
         verdiSjekker = new VerdiSjekker();
     }
 
@@ -25,7 +23,7 @@ public class ScrapeRunner implements Runnable {
         while(true){
             try {
 
-                coin.setPris(coinService.getPris(name));
+                coin.setPris(coinService.getPris(coin.getName()));
 
                 halvTimeSjekkVerdiEndring();
 

@@ -10,7 +10,7 @@ public class VerdiSjekker {
     private CoinUtil coinUtil;
 
     public VerdiSjekker() {
-        pb = new PushBullet(System.getenv("pb-api"));
+        //pb = new PushBullet(System.getenv("pb-api"));
         coinUtil = new CoinUtil();
     }
 
