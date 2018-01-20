@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Klient {
-    public static void main(String[] args) throws IOException {
-        new PushBullet(args[0]);
 
+
+    public static void main(String[] args) throws IOException {
+
+        PushBullet pb = new PushBullet(args[0]);
 
         for(int i = 1; i < args.length; i ++) {
             ScrapeRunner sr = new ScrapeRunner(args[i]);
@@ -19,6 +21,6 @@ public class Klient {
             coins[i] = args[i+1];
         }
 
-        PushBullet.client.sendNotePush("CryptoScraperLite Started!","Sjekk ut https://github.com/181221/CryptoScraperLite" + "\nTracking Coins: \n" + Arrays.toString(coins));
+        pb.client.sendNotePush("CryptoScraperLite Started!","Sjekk ut https://github.com/181221/CryptoScraperLite" + "\nTracking Coins: \n" + Arrays.toString(coins));
     }
 }

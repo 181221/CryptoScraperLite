@@ -5,17 +5,19 @@ import no.api.coinmarket.CoinService;
 
 import java.net.MalformedURLException;
 
-import static no.pederyo.util.CoinUtil.formaterTall;
-
 public class ScrapeRunner implements Runnable {
     private Coin coin;
     private String name;
     private static int iterasjon = 0;
+    private CoinService coinService;
+    private VerdiSjekker verdiSjekker;
 
     public ScrapeRunner(String name) throws MalformedURLException {
-        coin = CoinService.getPris(name);
+        coinService = new CoinService();
+        coin = coinService.getPris(name); //Oppretter coinen
         coin.setForjePris(coin.getPris());
         this.name = name;
+        verdiSjekker = new VerdiSjekker();
     }
 
     @Override
@@ -23,9 +25,9 @@ public class ScrapeRunner implements Runnable {
         while(true){
             try {
 
-                coin.setPris(CoinService.getPris(name).getPris());
+                coin.setPris(coinService.getPris(name).getPris());
 
-                halvTimeSjekkVerdiEndring(coin);
+                halvTimeSjekkVerdiEndring();
 
                 Thread.sleep(60000);
 
@@ -39,10 +41,10 @@ public class ScrapeRunner implements Runnable {
         }
     }
 
-    public static boolean halvTimeSjekkVerdiEndring(Coin coin) {
+    public boolean halvTimeSjekkVerdiEndring() {
         boolean leggTil = false;
         if (iterasjon % 30 == 0) {
-            leggTil = VerdiSjekker.sjekkVerdiOgPushNotifikasjon(coin); //sjekker gammel mot current verdi.
+            leggTil = verdiSjekker.sjekkVerdiOgPushNotifikasjon(coin); //sjekker gammel mot current verdi.
             if (leggTil) {
                 coin.setForjePris(coin.getPris()); //legger til ny verdi om det har vært en økning på 8% siden forjegang.
             }

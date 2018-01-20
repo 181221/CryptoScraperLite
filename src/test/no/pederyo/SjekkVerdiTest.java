@@ -1,12 +1,14 @@
 package no.pederyo;
 import no.api.coinmarket.Coin;
+import no.pederyo.Scraper.ScrapeRunner;
 import no.pederyo.Scraper.VerdiSjekker;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.net.MalformedURLException;
+
 import static junit.framework.TestCase.assertTrue;
-import static no.pederyo.Scraper.ScrapeRunner.halvTimeSjekkVerdiEndring;
 
 public class SjekkVerdiTest {
     private VerdiSjekker verdiSjekker;
@@ -22,30 +24,36 @@ public class SjekkVerdiTest {
         c.setName("bitcoin");
         c.setPris(9.9);
         c.setForjePris(10.9);
-        assertTrue(VerdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
+        assertTrue(verdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
 
         c.setForjePris(10);
         c.setPris(10.9);
-        assertTrue(VerdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
+        assertTrue(verdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
 
         c.setForjePris(10.1231);
         c.setPris(15.123);
-        assertTrue(VerdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
+        assertTrue(verdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
 
         c.setPris(23);
-        assertTrue(VerdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
+        assertTrue(verdiSjekker.sjekkVerdiOgPushNotifikasjon(c));
 
     }
-
+    // Maa ordnes paa.
     @Test
     public void haltimeendirng(){
+        ScrapeRunner sr = null;
+        try {
+             sr = new ScrapeRunner("bitcoin");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         c.setForjePris(10.1231);
         c.setPris(15.123);
-        assertTrue(halvTimeSjekkVerdiEndring(c));
+        assertTrue(sr.halvTimeSjekkVerdiEndring());
         assertTrue(c.getPris() == c.getForjePris());
 
         c.setPris(5.123);
-        assertTrue(halvTimeSjekkVerdiEndring(c));
+        assertTrue(sr.halvTimeSjekkVerdiEndring());
         assertTrue(c.getPris() == c.getForjePris());
 
 

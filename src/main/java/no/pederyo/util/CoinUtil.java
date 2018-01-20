@@ -4,11 +4,15 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 public class CoinUtil {
-    public static String formaterTall(double verdi) {
+
+    public CoinUtil() {
+    }
+
+    public String formaterTall(double verdi) {
         DecimalFormat f = new DecimalFormat("##.00");
         return f.format(verdi);
     }
-    public static double gjorOmDoubleTilBC(double forje, String operator, double differanse) {
+    public double gjorOmDoubleTilBC(double forje, String operator, double differanse) {
         BigDecimal b = new BigDecimal(forje);
         BigDecimal b1 = new BigDecimal(differanse);
         BigDecimal b2;
@@ -29,7 +33,7 @@ public class CoinUtil {
     }
 
 
-    public static double formaterDouble(double verdi, String pattern) {
+    public double formaterDouble(double verdi, String pattern) {
         DecimalFormat f = new DecimalFormat(pattern);
         String verdien = f.format(verdi).toString().replace(',', '.');
         return Double.parseDouble(verdien);

@@ -9,7 +9,11 @@ import java.net.URL;
 
 public class CoinService {
 
-    public static Coin getPris(String name) throws MalformedURLException {
+    public CoinService() {
+
+    }
+
+    public Coin getPris(String name) throws MalformedURLException {
         String baseUrl = "https://api.coinmarketcap.com/v1/ticker/";
         String coinname = name;
         URL url = new URL(baseUrl + coinname);
